@@ -37,6 +37,18 @@ const Draggable = ({ children }: Props) => {
         }
     }, [positionXY])
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (ref.current) {
+                reposition(ref.current)
+            }
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, [])
+
     return <div
         ref={ref}
         className="draggable"
