@@ -1,11 +1,13 @@
 import './app.css';
 import Box from "./components/Box";
+import Draggable from './components/Draggable';
 
 function App() {
     return (
         <div>
-
-            <Box />
+            <Draggable>
+                <Box />
+            </Draggable>
         </div>
     );
 }

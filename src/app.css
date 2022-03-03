@@ -4,3 +4,9 @@
     border: 1px solid black;
     box-sizing: border-box;
 }
+
+.draggable{
+    border: 1px solid red;
+    width: min-content;
+    padding: 5px;
+}
