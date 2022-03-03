@@ -1,3 +1,4 @@
+import { useLayoutEffect } from "react";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {
@@ -13,6 +14,28 @@ const Draggable = ({ children }: Props) => {
     const ref = useRef<HTMLDivElement>(null);
     const [positionXY, setStatePositionXY] = useState<PositionType>({ x: 0, y: 0 })
     const positionRef = useRef<PositionType>(positionXY);
+
+    const reposition = (elem: HTMLDivElement) => {
+        const bound = elem.getBoundingClientRect();
+        if (bound.x < 0) {
+            setStatePositionXY(prev => ({ ...prev, x: prev.x - bound.x }))
+        }
+        if ((bound.x + bound.width) > window.innerWidth) {
+            setStatePositionXY(prev => ({ ...prev, x: prev.x - (bound.x + bound.width - window.innerWidth) }))
+        }
+        if (bound.y < 0) {
+            setStatePositionXY(prev => ({ ...prev, y: prev.y - bound.y }))
+        }
+        if ((bound.y + bound.height) > window.innerHeight) {
+            setStatePositionXY(prev => ({ ...prev, y: prev.y - (bound.y + bound.height - window.innerHeight) }))
+        }
+    }
+
+    useEffect(() => {
+        if (ref.current) {
+            reposition(ref.current)
+        }
+    }, [positionXY])
 
     return <div
         ref={ref}
