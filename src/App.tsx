@@ -1,7 +1,11 @@
+import './app.css';
+import Box from "./components/Box";
+
 function App() {
     return (
-        <div className="App">
-            App
+        <div>
+
+            <Box />
         </div>
     );
 }
