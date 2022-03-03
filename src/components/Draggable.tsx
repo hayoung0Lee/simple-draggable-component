@@ -59,9 +59,15 @@ const Draggable = ({ children }: Props) => {
             transform: `translate(${positionXY.x}px, ${positionXY.y}px)`
         }}
         onDragStart={(e) => {
+            setTimeout(function () {
+                // @ts-ignore
+                e.target.style.visibility = "hidden";
+            }, 1);
             positionRef.current = { x: e.clientX, y: e.clientY }
         }}
         onDragEnd={(e) => {
+            // @ts-ignore
+            e.target.style.visibility = "visible";
             const diffX = e.clientX - positionRef.current.x;
             const diffY = e.clientY - positionRef.current.y;
             setStatePositionXY({ x: positionXY.x + diffX, y: positionXY.y + diffY })
